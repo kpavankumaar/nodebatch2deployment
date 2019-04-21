@@ -87,6 +87,8 @@ var productCtrl = {
     },
     save: async function(req,res){
         try {
+            console.log("****************",req.body);
+
             var savedProduct = await productSvc.save(req.body);
             res.status(201);
             res.json(savedProduct);

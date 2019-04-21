@@ -16,6 +16,7 @@ class ProductService{
         return Product.findById(id,{"__v":0}).exec()
     }
     save(data){
+        console.log("*********",data);
         var product = new Product(data)
         return product.save()
     }
