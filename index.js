@@ -1,8 +1,10 @@
 var express = require('express');
 const mongoose = require('mongoose');
 const middleware = require('./middleware');
-
+const config = require('./config')
+const PORT = process.env.PORT || 3000;
 var app = express();
+
 var bodyParser = require('body-parser');
 // var defaultCtrl = require('./controllers/default.ctrl');
 // var productCtrl = require('./controllers/product.ctrl');
@@ -10,8 +12,8 @@ var defaultRouter = require('./routes/default.router');
 var productRouter = require('./routes/product.router');
 var userRouter = require('./routes/user.router');
 var reviewRouter = require('./routes/review.router');
-mongoose.connect("mongodb://localhost:27017/nbits-nodebatch2-products",()=>{
-    console.log('db is connected');
+mongoose.connect(config.conStr,{dbName:'nbitsnodebatch2products'} ,(err)=>{
+    console.log('db err message',err);
 })
 
 app.use(bodyParser.json());
@@ -28,6 +30,6 @@ app.use('/api/users', userRouter);
 // app.get('/products',productCtrl.get);
 
 
-app.listen(3000,function(){
+app.listen(PORT,function(){
     console.log('we are listening to port 3000');
 })
